@@ -58,8 +58,7 @@ class CommonUtils {
         if (!(dartBaseDir.exists() || dartBaseDir.isDirectory())) {
             throw new MojoExecutionException(CAN_T_FIND_PROJECT_ROOT);
         }
-        Searchy searchy = new Searchy();
-        searchy.searchInDirectory(dartBaseDir, "pubspec.yaml");
+        Searchy.searchInDirectory(dartBaseDir, "pubspec.yaml");
         if (Searchy.results.size() < 1) {
             throw new MojoExecutionException(CAN_T_FIND_PROJECT_ROOT);
         } else if (Searchy.results.size() > 1) {
@@ -75,25 +74,17 @@ class CommonUtils {
  * Searches for elements in a given base dir
  */
 class Searchy {
-    private String query;
-    private List<String> results;
+    static String query;
+    static List<String> results;
 
-    public Searchy() {
-    }
-
-    public Searchy(File baseDir, String query) {
-        this.query = query;
-        this.searchInDirectory(baseDir, r);
-    }
-
-    void searchInDirectory(File baseDir, String q) {
+    static void searchInDirectory(File baseDir, String q) {
         results = new ArrayList<>();
         query = q;
         search(baseDir);
     }
 
     @SuppressWarnings("ConstantConditions")
-    private void search(File file) {
+    private static void search(File file) {
         if (file.isDirectory() && file.canRead()) {
             for (File f : file.listFiles()) {
                 if (f.isDirectory()) {
