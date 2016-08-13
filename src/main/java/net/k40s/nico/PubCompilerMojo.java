@@ -24,20 +24,20 @@ import static net.k40s.nico.Strings.*;
 public class PubCompilerMojo extends AbstractMojo {
 
     /**
-     * The output directory for the compiled dart project.
+     * The dart project root.
      * <p>
      * This param is optional, the default value is "src/main/dart".
      */
     @Parameter
-    private File targetDir;
+    private File projectRoot;
 
     /**
-     * The dart project root.
+     * The output directory for the compiled dart project.
      * <p>
      * This param is optional too, the default value is "src/main/resources/static".
      */
     @Parameter
-    private File projectRoot;
+    private File targetDir;
 
     private Log log = getLog();
 
